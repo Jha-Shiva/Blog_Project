@@ -1,7 +1,7 @@
 import bcryptjs from 'bcryptjs'
 import User from "../models/user.Model.js";
 
-export const userSignUp = async (req, res)=>{
+export const userSignUp = async (req, res, next)=>{
     const { username, email, password, profilePicture, isAdmin } = req.body;
     //validate
     if (!username || !email || !password || username === '' || email === '' || password === '') return res.status(400).json({ error: 'Please provide required fields' });
@@ -20,6 +20,6 @@ export const userSignUp = async (req, res)=>{
         await newUser.save();
         return res.status(201).json('signup successful');
     } catch (error) {
-        res.status(500).json({message: error.message})
+        next(error)
     }
 };

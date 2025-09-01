@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import connectDb from './config/db.js';
 import testRouter from './routes/test.routes.js';
 import authRouter from './routes/auth.routes.js'
+import errorHandler  from './middlewares/error.middlewares.js';
 
 //config dotenv
 dotenv.config()
@@ -24,6 +25,9 @@ app.use(express.json())
 app.use('/test', testRouter);
 // app.use('/api/user')
 app.use('/api/auth', authRouter)
+
+//validation middlewares
+app.use(errorHandler)
 
 app.listen(PORT,()=>{
     console.log(`server is running on port ${PORT}`.bgCyan);
