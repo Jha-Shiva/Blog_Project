@@ -1,8 +1,11 @@
 import express from 'express';
 import colors from 'colors';
 import dotenv from 'dotenv';
+
+//files import
 import connectDb from './config/db.js';
 import testRouter from './routes/test.routes.js';
+import authRouter from './routes/auth.routes.js'
 
 //config dotenv
 dotenv.config()
@@ -18,7 +21,9 @@ const PORT = process.env.PORT || 8080
 app.use(express.json())
 
 //routes
-app.use('/test', testRouter)
+app.use('/test', testRouter);
+// app.use('/api/user')
+app.use('/api/auth', authRouter)
 
 app.listen(PORT,()=>{
     console.log(`server is running on port ${PORT}`.bgCyan);
