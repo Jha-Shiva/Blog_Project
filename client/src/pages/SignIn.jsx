@@ -2,13 +2,16 @@ import { Alert, Button, Label, Spinner, TextInput, Toast } from 'flowbite-react'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { FaTelegramPlane } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice';
 
 const SignIn = () => {
   const [formData, setFormData] = useState({});
-  const [errorMessage, setErrorMessage] = useState(null);
+  const { loading, error: errorMessage } = useSelector((state) => state.user);
   const [successMessage, setSuccessMessage] = useState(null);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+
 
   const handleChange = (e) => {
     setFormData({...formData, [e.target.name]: e.target.value.trim()});
@@ -17,11 +20,10 @@ const SignIn = () => {
   const handleSubmit = async (e) =>{
     e.preventDefault();
     if( !formData.email || !formData.password){
-      return setErrorMessage("All fields are required");
+      return dispatch(signInFailure("All fields are required"));
     }
     try {
-      setLoading(true);
-      setErrorMessage(null);
+      dispatch(signInStart());
       setSuccessMessage(null);
 
       //send data to server
@@ -35,22 +37,18 @@ const SignIn = () => {
 
       //handle server errors
       if (data.success === false) {
-        setLoading(false);
-        return setErrorMessage(data.message || "Loged In failed");
+        return dispatch(signInFailure(data.message || "Login failed"));
       }
       // handle success message
       if(data.success === true){
-        setLoading(false);
-        setSuccessMessage(data.message || "Loged In successful");
+        setSuccessMessage(data.message || "Login successful");
+        dispatch(signInSuccess(data));
         navigate('/');
         return;
       }
-      
-      setLoading(false);
 
     } catch (error) {
-      setErrorMessage(error.message || "An error occurred") 
-      setLoading(false); 
+      dispatch(signInFailure(error.message || "An error occurred")); 
     }
   };
 
@@ -90,7 +88,7 @@ const SignIn = () => {
                 type="email"
                 name="email"
                 placeholder="example@gmail.com"
-                required
+                // required
                 onChange={handleChange}
               />
             </div>
@@ -102,7 +100,7 @@ const SignIn = () => {
                 type="password"
                 name="password"
                 placeholder="********"
-                required
+                // required
                 onChange={handleChange}
               />
             </div>
@@ -141,7 +139,7 @@ const SignIn = () => {
             <Toast>
               <FaTelegramPlane className="h-5 w-5 text-cyan-600 dark:text-cyan-500" />
               <div className="pl-4 text-sm font-normal">
-                Successfully Loged in!
+                Successfully Login!
               </div>
             </Toast>
           )}

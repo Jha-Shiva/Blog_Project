@@ -36,12 +36,12 @@ export const userSignIn = async (req, res, next)=>{
     try {
         const validUser = await User.findOne({ email });
         if(!validUser){
-            return res.status(404).json({success: false, error: 'user not found'})
+            return res.status(404).json({success: false, message: 'user not found'})
         };
         //valid user password
         const validPassword = await bcryptjs.compare(password, validUser.password);
         if(!validPassword){
-            return res.status(400).json({success: false , error: 'Invalid password !!!'})
+            return res.status(400).json({success: false , message: 'Invalid password !!!'})
         };
 
         //token generate

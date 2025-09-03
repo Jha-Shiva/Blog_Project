@@ -89,7 +89,7 @@ const SignUp = () => {
                 type="text"
                 name="username"
                 placeholder="username"
-                required
+                // required
                 onChange={handleChange}
               />
             </div>
@@ -101,7 +101,7 @@ const SignUp = () => {
                 type="email"
                 name="email"
                 placeholder="example@gmail.com"
-                required
+                // required
                 onChange={handleChange}
               />
             </div>
@@ -113,7 +113,7 @@ const SignUp = () => {
                 type="password"
                 name="password"
                 placeholder="password"
-                required
+                // required
                 onChange={handleChange}
               />
             </div>
