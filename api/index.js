@@ -7,6 +7,7 @@ import connectDb from './config/db.js';
 import testRouter from './routes/test.routes.js';
 import authRouter from './routes/auth.routes.js'
 import errorHandler  from './middlewares/error.middlewares.js';
+import cookieParser from 'cookie-parser';
 
 //config dotenv
 dotenv.config()
@@ -20,6 +21,7 @@ const PORT = process.env.PORT || 8080
 
 //middlewares
 app.use(express.json())
+app.use(cookieParser())
 
 //routes
 app.use('/test', testRouter);
