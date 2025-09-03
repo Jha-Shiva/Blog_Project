@@ -101,7 +101,7 @@ const SignIn = () => {
                 id="password"
                 type="password"
                 name="password"
-                placeholder="password"
+                placeholder="********"
                 required
                 onChange={handleChange}
               />
