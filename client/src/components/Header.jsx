@@ -1,10 +1,13 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { AiOutlineSearch } from "react-icons/ai";
-import { Button, DarkThemeToggle, Navbar, NavbarCollapse, NavbarLink, NavbarToggle, TextInput } from 'flowbite-react'
+import { Avatar, Button, DarkThemeToggle, Dropdown, DropdownDivider, DropdownHeader, DropdownItem, Navbar, NavbarCollapse, NavbarLink, NavbarToggle, TextInput } from 'flowbite-react'
+import { useSelector} from 'react-redux';
 
 const Header = () => {
   const path = useLocation().pathname;
+  const {currentUser} = useSelector((state)=>state.user)
+ 
   return (
     <Navbar fluid className="shadow-xl">
       <Link
@@ -36,13 +39,38 @@ const Header = () => {
         focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 
         dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 sm:inline'/>
 
-        <Link to='/sign-in'>
-          <button className=" relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-3xl group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
-            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-3xl group-hover:bg-transparent group-hover:dark:bg-transparent">
-              Sign In
-            </span>
-          </button>
-        </Link>
+        {currentUser ? (
+          <Dropdown
+            arrowIcon={false}
+            inline
+            label={ <Avatar
+            alt ='user'
+            img={currentUser?.rest?.profilePicture}
+            rounded
+            />}
+          >
+            <DropdownHeader>
+              <span className='block text-sm'>@{currentUser.rest.username}</span>
+              <span className='block text-sm font-medium truncate'>@{currentUser.rest.email}</span>
+            </DropdownHeader>
+            <Link to={'/dashboard?tab=profile'}>
+              <DropdownItem>Profile</DropdownItem>
+            </Link>
+            <DropdownDivider/>
+            <DropdownItem>Sign out</DropdownItem>
+
+          </Dropdown>
+        ) : (
+
+          <Link to='/sign-in'>
+            <button className=" relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-3xl group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+              <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-3xl group-hover:bg-transparent group-hover:dark:bg-transparent">
+                Sign In
+              </span>
+            </button>
+          </Link>
+        )}
+
         <NavbarToggle className='w-10 h-10 shadow-sm'/>
       </div>
         <NavbarCollapse>
