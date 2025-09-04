@@ -2,11 +2,13 @@ import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { AiOutlineSearch } from "react-icons/ai";
 import { Avatar, Button, DarkThemeToggle, Dropdown, DropdownDivider, DropdownHeader, DropdownItem, Navbar, NavbarCollapse, NavbarLink, NavbarToggle, TextInput } from 'flowbite-react'
-import { useSelector} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import {toggleTheme} from '../redux/theme/themeSlice.js'
 
 const Header = () => {
   const path = useLocation().pathname;
   const {currentUser} = useSelector((state)=>state.user)
+  const dispatch = useDispatch();
  
   return (
     <Navbar fluid className="shadow-xl">
@@ -35,7 +37,9 @@ const Header = () => {
 
       <div className='flex md:order-2 gap-2'>
         
-        <DarkThemeToggle className='hidden text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4
+        <DarkThemeToggle 
+          onClick={()=>dispatch(toggleTheme())}
+          className='hidden text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4
         focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 
         dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 sm:inline'/>
 

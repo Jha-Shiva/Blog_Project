@@ -1,4 +1,5 @@
 @import "tailwindcss";
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+/* @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *)); */ /* work only if dark class on html or body */
+@custom-variant dark (&:where(.dark, .dark *)); /* work if dark class on div  */
 @plugin "flowbite-react/plugin/tailwindcss";
 @source "../.flowbite-react/class-list.json";
