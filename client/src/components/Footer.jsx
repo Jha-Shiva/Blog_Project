@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const FooterCom = () => {
   return (
-    <Footer container className="border border-t-8 border-t-blue-500 dark:bg-gray-900 dark:text-white ">
+    <Footer container className="border-t-8 border-t-blue-500 dark:bg-gray-900 dark:text-white ">
       <div className='w-full max-w-7xl mx-auto'>
         <div className='grid w-full justify-between sm:flex md:grid-cols-1'>
           {/* Logo */}

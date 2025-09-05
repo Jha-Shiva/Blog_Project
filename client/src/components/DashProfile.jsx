@@ -1,18 +1,43 @@
 import { TextInput } from 'flowbite-react'
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 const DashProfile = () => {
   const {currentUser} = useSelector((state)=> state.user)
+  const [imageFile, setImageFile] = useState(null);
+  const [imageFileUrl, setImageFileUrl] = useState(null);
+  const filePickerRef = useRef()
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if(file){
+      setImageFile(e.target.files[0]);
+      setImageFileUrl(URL.createObjectURL(file));
+    }
+  };
+
+  useEffect(()=>{
+    if(imageFile){
+      // upload image to server
+      uploadImageToServer();
+    }
+  },[imageFile]);
+
+  const uploadImageToServer = async()=>{
+    console.log('uploading Imaage ...');
+  }
+
   return (
     <div className="max-w-lg mx-auto p-4 w-full">
       <h1 className="my-7 text-center font-semibold roboto text-3xl">
         Profile
       </h1>
       <form className="flex flex-col gap-4 mt-4">
-        <div className="w-34 h-32 self-center cursor-pointer shadow-md shadow-gray-400 rounded-full overflow-hidden">
+        <input type="file" accept='image/*' onChange={handleImageChange} ref={filePickerRef} hidden/>
+        <div className="w-34 h-32 self-center cursor-pointer shadow-md shadow-gray-400 rounded-full overflow-hidden"
+          onClick={()=> filePickerRef.current.click()}>
           <img
-            src={currentUser.rest.profilePicture}
+            src={imageFileUrl || currentUser.rest.profilePicture}
             alt="user"
             className="rounded-full w-full h-full object-cover border-8 border-[lightgray]"
           />
@@ -30,8 +55,8 @@ const DashProfile = () => {
           defaultValue={currentUser.rest.email}
         />
         <TextInput type="password" id="password" placeholder="password" />
-        <button class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
-          <span class="relative w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
+        <button className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+          <span className="relative w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
             Update
           </span>
         </button>

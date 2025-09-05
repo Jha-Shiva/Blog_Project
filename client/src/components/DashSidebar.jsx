@@ -18,7 +18,7 @@ const DashSidebar = () => {
       <SidebarItems>
         <SidebarItemGroup>
           <Link to="/dashboard?tab=profile" className="no-underline">
-            <SidebarItem active={tab === 'profile'} icon={HiUserCircle} label='User' labelColor='dark'>
+            <SidebarItem as={'div'} active={tab === 'profile'} icon={HiUserCircle} label='User' labelColor='dark'>
               Profile
             </SidebarItem>
           </Link>
