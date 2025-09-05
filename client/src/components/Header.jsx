@@ -49,13 +49,13 @@ const Header = () => {
             inline
             label={ <Avatar
             alt ='user'
-            img={currentUser?.rest?.profilePicture}
+            img={currentUser?.rest?.profilePicture || currentUser?.user?.profilePicture}
             rounded
             />}
           >
             <DropdownHeader>
-              <span className='block text-sm'>@{currentUser.rest.username}</span>
-              <span className='block text-sm font-medium truncate'>@{currentUser.rest.email}</span>
+              <span className='block text-sm'>@{currentUser?.rest?.username || currentUser.user.username}</span>
+              <span className='block text-sm font-medium truncate'>@{currentUser?.rest?.email || currentUser.user.email}</span>
             </DropdownHeader>
             <Link to={'/dashboard?tab=profile'}>
               <DropdownItem>Profile</DropdownItem>

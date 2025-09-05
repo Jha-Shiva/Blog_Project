@@ -2,7 +2,7 @@ const errorHandler = (err, req, res, next)=>{
     console.log(err);
     res.status(500).json({
         success: false,
-        message: 'Something Went Wrong',
+        message: err.message || 'Something Went Wrong',
     });
 };
 
