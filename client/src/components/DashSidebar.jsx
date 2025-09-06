@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Sidebar, SidebarItem, SidebarItemGroup, SidebarItems } from 'flowbite-react'
 import { HiArrowCircleRight, HiUserCircle } from 'react-icons/hi'
 import { Link, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { signoutSuccess } from '../redux/user/userSlice.js'
 import { useNavigate } from 'react-router-dom'
 
@@ -11,6 +11,7 @@ const DashSidebar = () => {
   const [tab, setTab] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const {currentUser} = useSelector((state)=> state.user)
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const tabFromUrl = urlParams.get("tab");
@@ -44,7 +45,7 @@ const DashSidebar = () => {
       <SidebarItems>
         <SidebarItemGroup>
           <Link to="/dashboard?tab=profile" className="no-underline">
-            <SidebarItem as={'div'} active={tab === 'profile'} icon={HiUserCircle} label='User' labelColor='dark'>
+            <SidebarItem as={'div'} active={tab === 'profile'} icon={HiUserCircle} label={currentUser.rest.isAdmin ? 'Admin': 'User'} labelColor='dark'>
               Profile
             </SidebarItem>
           </Link>

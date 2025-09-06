@@ -6,3 +6,20 @@
 .roboto {
     font-family: Roboto, sans-serif;
 }
+
+.jodit_toolbar_button {
+  background-color: #7c3aed; /* Purple */
+  color: white;
+  border-radius: 6px;
+  margin: 0 4px;
+}
+.jodit_toolbar_button:hover {
+  background-color: #6b21a8; /* Darker purple on hover */
+  color: white;
+}
+.jodit-wysiwyg {
+  font-family: Roboto,"Inter", sans-serif !important; /* Custom font */
+  font-size: 1.05rem !important;
+  line-height: 1.5 !important;
+  padding: 1rem !important;
+}
