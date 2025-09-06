@@ -3,13 +3,14 @@ import errorHandler from './error.middlewares.js';
 export const verifyToken = (req, res, next) => {
   const token = req.cookies.access_token;
   if (!token) {
-    return next('Unauthorized');
+   return res.status(401).json({ success: false, message: "No token provided. Please login first." });
   }
-  jwt.verify(token, process.env.SECRET, (err, user) => {
-    if (err) {
-      return next(errorHandler('Unauthorized'));
-    }
-    req.user = user;
+  
+  try {
+    const decoded = jwt.verify(token, process.env.SECRET);
+    req.user = decoded; // attach user to request
     next();
-  });
+  } catch (error) {
+    return res.status(401).json({ success: false, message: "Invalid or expired token. Please login again." });
+  }
 };

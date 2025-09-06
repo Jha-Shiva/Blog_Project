@@ -85,6 +85,7 @@ const DashProfile = () => {
           dispatch(deleteUserFailure(data.message));
         } else {
           dispatch(deleteUserSuccess(data));
+          navigate("/sign-up");
         }
       } catch (error) {
         dispatch(deleteUserFailure(error.message));
@@ -97,10 +98,16 @@ const DashProfile = () => {
           method: "POST",
         });
         const data = await res.json();
+        if (res.status === 401) {
+          dispatch(signoutSuccess());
+          navigate("/sign-in");
+          return;
+        }
         if (!res.ok) {
           console.log(data.message);
         } else {
           dispatch(signoutSuccess());
+          navigate("/sign-in");
         }
       } catch (error) {
         console.log(error.message);
@@ -140,23 +147,34 @@ const DashProfile = () => {
             Update
           </span>
         </button>
+
+        {currentUser.rest.isAdmin && (
+          <Link to={'/create-post'}>
+          <button className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+            <span className="relative w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
+              Create a Post
+            </span>
+          </button>
+          </Link>
+        )}
+
       </form>
       <div className="text-red-500 mt-5 flex justify-between">
         <span className='cursor-pointer' onClick={() => setShowModal(true)}>Delete Account</span>
         <span className='cursor-pointer' onClick={handleSignout}>Sign Out</span>
       </div>
       {updateUserSuccess && (
-        <Alert color='success' className='mt-5'>
+        <Alert color='success' className='mt-5' onDismiss={() => setUpdateUserSuccess()}>
           {updateUserSuccess}
         </Alert>
       )}
       {updateUserError && (
-        <Alert color='failure' className='mt-5'>
+        <Alert color='failure' className='mt-5' onDismiss={() => setUpdateUserError(null)}>
           {updateUserError}
         </Alert>
       )}
       {error && (
-        <Alert color='failure' className='mt-5'>
+        <Alert color='failure' className='mt-5' onDismiss={() => dispatch(updateFailure(null))}>
           {error}
         </Alert>
       )}

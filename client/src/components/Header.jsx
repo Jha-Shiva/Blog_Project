@@ -4,11 +4,36 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { Avatar, Button, DarkThemeToggle, Dropdown, DropdownDivider, DropdownHeader, DropdownItem, Navbar, NavbarCollapse, NavbarLink, NavbarToggle, TextInput } from 'flowbite-react'
 import { useSelector, useDispatch } from 'react-redux';
 import {toggleTheme} from '../redux/theme/themeSlice.js'
+import {   signoutSuccess } from '../redux/user/userSlice.js';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const path = useLocation().pathname;
   const {currentUser} = useSelector((state)=>state.user)
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleSignout = async () => {
+        try {
+          const res = await fetch("/api/user/signout", {
+            method: "POST",
+          });
+          const data = await res.json();
+          if (res.status === 401) {
+            dispatch(signoutSuccess());
+            navigate("/sign-in");
+            return;
+          }
+          if (!res.ok) {
+            console.log(data.message);
+          } else {
+            dispatch(signoutSuccess());
+            navigate("/sign-in");
+          }
+        } catch (error) {
+          console.log(error.message);
+        }
+      };
  
   return (
     <Navbar fluid className="shadow-xl">
@@ -61,7 +86,7 @@ const Header = () => {
               <DropdownItem>Profile</DropdownItem>
             </Link>
             <DropdownDivider/>
-            <DropdownItem>Sign out</DropdownItem>
+            <DropdownItem onClick={handleSignout}>Sign out</DropdownItem>
 
           </Dropdown>
         ) : (
