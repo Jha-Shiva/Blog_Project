@@ -3,3 +3,4 @@
 @custom-variant dark (&:where(.dark, .dark *)); /* work if dark class on div  */
 @plugin "flowbite-react/plugin/tailwindcss";
 @source "../.flowbite-react/class-list.json";
+@plugin 'tailwind-scrollbar';
