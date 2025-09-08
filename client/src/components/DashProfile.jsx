@@ -188,7 +188,7 @@ const DashProfile = () => {
               Are you sure you want to delete your account?
             </h3>
             <div className='flex justify-center gap-4'>
-              <Button color='failure' onClick={handleDeleteUser}>
+              <Button color='red' onClick={handleDeleteUser}>
                 Yes, I'm sure
               </Button>
               <Button color='gray' onClick={() => setShowModal(false)}>
