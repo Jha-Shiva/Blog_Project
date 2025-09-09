@@ -67,10 +67,6 @@ export const profileUpdate = async (req, res, next)=>{
 }
 
 export const deleteUser = async (req, res, next)=>{
-    console.log('req.user',req.user.id);
-    console.log('req.params.userId', req.params.userId);
-    console.log(!req.user.isAdmin && String(req.user.id) !== String(req.params.userId));
-    console.log(String(req.user.id) !== String(req.params.userId));
     if(!req.user.isAdmin && String(req.user.id) !== String(req.params.userId)){
         return res.status(403).json({success: false, message: 'You are not authorized to delete this account'});
     };
