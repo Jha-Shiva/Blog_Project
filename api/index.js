@@ -4,10 +4,11 @@ import dotenv from 'dotenv';
 
 //files import
 import connectDb from './config/db.js';
-import testRouter from './routes/test.routes.js';
-import authRouter from './routes/auth.routes.js'
-import userRouter from './routes/user.routes.js'
-import postRouter from './routes/post.routes.js'
+import testRoutes from './routes/test.routes.js';
+import authRoutes from './routes/auth.routes.js'
+import userRoutes from './routes/user.routes.js'
+import postRoutes from './routes/post.routes.js'
+import commentRoutes from './routes/comment.routes.js'
 import errorHandler  from './middlewares/error.middlewares.js';
 import cookieParser from 'cookie-parser';
 
@@ -26,11 +27,12 @@ app.use(express.json())
 app.use(cookieParser())
 
 //routes
-app.use('/test', testRouter);
+app.use('/test', testRoutes);
 // app.use('/api/user')
-app.use('/api/auth', authRouter)
-app.use('/api/user', userRouter)
-app.use('/api/post', postRouter)
+app.use('/api/auth', authRoutes)
+app.use('/api/user', userRoutes)
+app.use('/api/post', postRoutes)
+app.use('/api/comment', commentRoutes)
 
 //validation middlewares
 app.use(errorHandler)
