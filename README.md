@@ -82,8 +82,8 @@ This project is a full-stack blog application built using the MERN stack (MongoD
 
 1. Clone the repository:
    ```bash
-    git clone https://github.com/your-username/echo-blog.git
-    cd echo-blog
+    git clone https://github.com/Jha-Shiva/Blog_Project.git
+    cd Blog_Project
 
    ```
 
@@ -96,7 +96,7 @@ This project is a full-stack blog application built using the MERN stack (MongoD
 
     #### Server
     ```
-    cd ../server
+    cd ../api
     npm install
     ```
 
@@ -112,8 +112,8 @@ This project is a full-stack blog application built using the MERN stack (MongoD
 4. Run the app
     #### Start backend
     ```
-    cd server
-    npm run dev
+    cd api
+    npm run server
     ```
 
     #### Start frontend
