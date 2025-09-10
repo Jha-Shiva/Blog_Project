@@ -37,7 +37,6 @@ This project is a full-stack blog application built using the MERN stack (MongoD
 -   **Redux Toolkit:** For managing application state.
 -   **React Router DOM:** For handling client-side routing.
 -   **Jodit Editor:** A WYSIWYG editor for creating and editing blog post content.
--   **Axios:** For making HTTP requests.
 -   **js-cookie:** For handling cookies.
 -   **Moment.js:** For formatting dates.
 
