@@ -4,6 +4,17 @@
 
 This project is a full-stack blog application built using the MERN stack (MongoDB, Express.js, React.js, Node.js). It allows users to create, read, update, and delete blog posts, as well as comment on them. The application includes features such as user authentication, authorization, and a dashboard for administrators to manage content.
 
+## Table of contents
+
+- [Features](#features)
+- [Client Technology](#client)
+- [Server Technology](#server)
+- [Project Structure](#project-structure)
+- [Setup](#setup)
+- [Api Endpoints](#api-endpoints)
+- [📸Screenshots](#📸-screenshots)
+- [Contribution](#contributing)
+
 ## Features
 
 -   **User Authentication:** Secure user registration and login using JWT.
@@ -162,5 +173,15 @@ This project is a full-stack blog application built using the MERN stack (MongoD
 
 
 
+## Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1.  Fork the repository.
+2.  Create a new branch for your feature or bug fix.
+3.  Make your changes and commit them.
+4.  Submit a pull request.
+
 ## License
-MIT
+
+[MIT](LICENSE)
