@@ -12,7 +12,7 @@ This project is a full-stack blog application built using the MERN stack (MongoD
 - [Project Structure](#project-structure)
 - [Setup](#setup)
 - [Api Endpoints](#api-endpoints)
-- [📸Screenshots](#📸-screenshots)
+- [📸Screenshots](#screenshots)
 - [Contribution](#contributing)
 
 ## Features
@@ -137,7 +137,7 @@ This project is a full-stack blog application built using the MERN stack (MongoD
 - `PUT /api/comment/editComment/:commentId` - Edit comment
 - `DELETE /api/comment/deleteComment/:commentId` - Delete comment
 
-## 📸 Screenshots
+## Screenshots
 
 <details> <summary><strong>🏠 Home & Navigation</strong></summary>
 
